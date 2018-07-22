@@ -1,0 +1,108 @@
+{
+    "name": "imagesprites",
+    "displayName": "Image Sprites",
+    "description": "Improve your website's performance by create image sprites to reduce the amount of HTTP requests.",
+    "version": "1.0.0",
+    "publisher": "gurayyarar",
+    "icon": "images/icon.png",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gurayyarar/ImageSprites"
+    },
+    "bugs": {
+        "url": "https://github.com/gurayyarar/ImageSprites/issues"
+    },
+    "engines": {
+        "vscode": "^1.25.0"
+    },
+    "keywords": [
+        "Image",
+        "Image Sprites",
+        "Sprite",
+        "VSCode"
+    ],
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.startImageSprite",
+        "onCommand:extension.updateImageSprite"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "languages": [
+            {
+                "id": "spriteimage",
+                "extensions": [
+                    ".png",
+                    ".jpg",
+                    ".bmp"
+                ],
+                "aliases": [
+                    "Spriteimages"
+                ]
+            },
+            {
+                "id": "spritefile",
+                "extensions": [
+                    ".sprite"
+                ],
+                "aliases": [
+                    "Sprite File"
+                ]
+            }
+        ],
+        "commands": [
+            {
+                "command": "extension.startImageSprite",
+                "title": "Create Image Sprite"
+            },
+            {
+                "command": "extension.updateImageSprite",
+                "title": "Update Image Sprite"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "extension.startImageSprite",
+                    "when": "explorerResourceIsFolder"
+                },
+                {
+                    "command": "extension.startImageSprite",
+                    "when": "resourceLangId == 'spriteimage'"
+                },
+                {
+                    "command": "extension.updateImageSprite",
+                    "when": "resourceLangId == 'spritefile'"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "extension.updateImageSprite",
+                    "when": "resourceLangId == 'spritefile'"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "@types/image-size": "0.0.29",
+        "image-size": "^0.6.3",
+        "jimp": "^0.2.28"
+    }
+}
